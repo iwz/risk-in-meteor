@@ -25,9 +25,7 @@ Template.map.rendered = function () {
       .enter().insert("path", ".graticule")
         .attr("class", "territory")
         .attr("d", path)
-        .attr("data-territory", function(d) {
-                                              return d.id;
-                                            });
+        .attr("data-territory", function(d) { return d.id; });
   });
 
   d3.select(self.frameElement).style("height", height + "px");
