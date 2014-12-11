@@ -144,32 +144,56 @@ if (Meteor.isServer) {
 
     Territory.insert({
       _id: "1",
-      name: "Indonesia",
-      continent: "Australia",
+      name: "Greenland",
+      continent: "North America",
     });
 
     Territory.insert({
       _id: "2",
-      name: "New Guinea",
-      continent: "Australia",
+      name: "Alaska",
+      continent: "North America",
     });
 
     Territory.insert({
       _id: "3",
-      name: "LotR",
-      continent: "Australia",
+      name: "Northwest Territory",
+      continent: "North America",
     });
 
     Territory.insert({
       _id: "4",
-      name: "Western Australia",
-      continent: "Australia",
+      name: "Alberta",
+      continent: "North America",
     });
 
     Territory.insert({
       _id: "5",
-      name: "Eastern Australia",
-      continent: "Australia",
+      name: "Ontario",
+      continent: "North America",
+    });
+
+    Territory.insert({
+      _id: "6",
+      name: "Quebec",
+      continent: "North America",
+    });
+
+    Territory.insert({
+      _id: "7",
+      name: "Western United States",
+      continent: "North America",
+    });
+
+    Territory.insert({
+      _id: "8",
+      name: "Eastern United States",
+      continent: "North America",
+    });
+
+    Territory.insert({
+      _id: "9",
+      name: "Central America",
+      continent: "North America",
     });
   });
 }
