@@ -1,8 +1,3 @@
-Game = new Mongo.Collection("games");
-Player = new Mongo.Collection("players");
-Territory = new Mongo.Collection("territories");
-Occupation = new Mongo.Collection("occupations");
-
 if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault("counter", 0);
