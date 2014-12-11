@@ -12,8 +12,29 @@ if (Meteor.isClient) {
       players: Player.find(),
       territories: Territory.find(),
       games: Game.find(),
+      occupations: Occupation.find()
     }
   );
+
+
+  Template.occupation.helpers({
+    player_name: function() {
+      player = Player.findOne(this.player)
+      return player.name
+    },
+    territory_name: function() {
+      territory = Territory.findOne(this.territory)
+      return territory.name
+    }
+  });
+
+  Template.player.helpers({
+    armies: function() {
+      occupation = Occupation.find({player: this._id})
+      return occupation.armies
+    }
+  })
+
 
   Template.body.events({
     "submit .new-game": function(event) {
@@ -28,12 +49,15 @@ if (Meteor.isClient) {
         ["5"],
       ];
 
+
+      Meteor.call("resetGames");
+
       var gameId = Game.insert({name: "Game"});
       // create oocupations for each territory/player
       for (var n = 0; n < players.length; n++) {
         var territories = territoriesByPlayer[n];
         var player = players[n];
-        var armiesPerTerritory = maxArmies / territories.length
+        var armiesPerTerritory = Math.floor(maxArmies / territories.length)
 
         for (var x = 0; x < territories.length; x++) {
           Occupation.insert({
@@ -62,6 +86,7 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
+
   Meteor.startup(function () {
 
     Player.update(
@@ -133,3 +158,10 @@ if (Meteor.isServer) {
     });
   });
 }
+
+Meteor.methods({
+  resetGames: function() {
+    Game.remove({});
+    Occupation.remove({});
+  }
+});
