@@ -35,6 +35,13 @@ if (Meteor.isClient) {
     }
   })
 
+  Template.game.helpers({
+    currentPlayerName: function() {
+      player = Player.findOne(this.currentPlayer)
+      return player.name
+    }
+  })
+
 
   Template.body.events({
     "submit .new-game": function(event) {
@@ -52,7 +59,12 @@ if (Meteor.isClient) {
 
       Meteor.call("resetGames");
 
-      var gameId = Game.insert({name: "Game"});
+      // Create game
+      var gameId = Game.insert({
+        name: "Game",
+        currentPlayer: players[0]
+      });
+
       // create oocupations for each territory/player
       for (var n = 0; n < players.length; n++) {
         var territories = territoriesByPlayer[n];
