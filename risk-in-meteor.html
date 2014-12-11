@@ -1,8 +1,34 @@
 <head>
   <title>RISK - destroy your friends</title>
-  <script src="js/d3.3.5.2.min.js"></script>
-  <script src="js/d3projection.js"></script>
-  <script src="js/topojson.1.6.18.min.js"></script>
+  <script type="text/javascript" src="/js/d3.3.5.2.min.js"></script>
+  <script type="text/javascript" src="/js/d3projection.js"></script>
+  <script type="text/javascript" src="/js/topojson.1.6.18.min.js"></script>
+  <style>
+
+    #map svg {
+      fill: #fff;
+    }
+
+    .graticule {
+      fill: none;
+      stroke: #777;
+      stroke-width: .5px;
+      stroke-opacity: .5;
+    }
+
+    .territory {
+      fill: #745a41;
+    }
+    .territory:hover {
+      fill: #c56c17;
+    };
+
+    .boundary {
+      fill: none;
+      stroke: #fff;
+      stroke-width: .5px;
+    }
+  </style>
 </head>
 
 <body>

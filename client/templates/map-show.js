@@ -16,29 +16,18 @@ Template.map.rendered = function () {
       .attr("width", width)
       .attr("height", height);
 
-  d3.json("/json/countries.json", function(error, world) {
-    var countries = topojson.feature(world, world.objects.countries).features;
+  d3.json("/json/map_topojson_3.json", function(error, world) {
+
+    var countries = topojson.feature(world, world.objects.map).features;
 
     svg.selectAll(".country")
         .data(countries)
       .enter().insert("path", ".graticule")
-        .attr("class", "country")
-        .attr("d", path);
-
-    // svg.insert("path")
-    //     .datum(topojson.feature(world, world.objects.land))
-    //     .attr("class", "land")
-    //     .attr("d", path);
-
-    // svg.insert("path")
-    //     .datum(topojson.feature(world, world.objects.land))
-    //     .attr("class", "land")
-    //     .attr("d", path);
-
-    svg.insert("path")
-        .datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }))
-        .attr("class", "boundary")
-        .attr("d", path);
+        .attr("class", "territory")
+        .attr("d", path)
+        .attr("data-territory", function(d) {
+                                              return d.id;
+                                            });
   });
 
   d3.select(self.frameElement).style("height", height + "px");
