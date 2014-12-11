@@ -1,5 +1,8 @@
 <head>
   <title>RISK - destroy your friends</title>
+  <script src="js/d3.3.5.2.min.js"></script>
+  <script src="js/d3projection.js"></script>
+  <script src="js/topojson.1.6.18.min.js"></script>
 </head>
 
 <body>
@@ -36,6 +39,8 @@
       {{> occupation}}
     {{/each}}
   </ul>
+
+  {{> map}}
 </body>
 
 <template name="game">
@@ -53,4 +58,8 @@
 
 <template name="territory">
   <li>{{name}} - {{continent}}</li>
+</template>
+
+<template name="map">
+  <div id="map"></div>
 </template>
