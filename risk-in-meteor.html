@@ -1,14 +1,31 @@
 <head>
-  <title>risk-in-meteor</title>
+  <title>RISK - destroy your friends</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  <h1>Welcome to RISK!</h1>
+  <h2>Would you like to play a game?</h2>
+  <form class="new-game">
+    <input type="submit">
+  </form>
 
-  {{> hello}}
+  <ul>
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </ul>
+
+  <ul>
+    {{#each territories}}
+      {{> territory}}
+    {{/each}}
+  </ul>
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="player">
+  <li>{{name}}</li>
+</template>
+
+<template name="territory">
+<li>{{name}} - {{continent}}</li>
 </template>
