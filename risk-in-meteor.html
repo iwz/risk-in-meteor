@@ -10,6 +10,12 @@
   </form>
 
   <ul>
+    {{#each games}}
+      {{> game}}
+    {{/each}}
+  </ul>
+
+  <ul>
     {{#each players}}
       {{> player}}
     {{/each}}
@@ -21,6 +27,11 @@
     {{/each}}
   </ul>
 </body>
+
+<template name="game">
+  <li>{{name}}</li>
+</template>
+
 
 <template name="player">
   <li>{{name}}</li>

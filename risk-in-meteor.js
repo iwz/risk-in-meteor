@@ -11,15 +11,16 @@ if (Meteor.isClient) {
     {
       players: Player.find(),
       territories: Territory.find(),
+      games: Game.find(),
     }
   );
 
   Template.body.events({
     "submit .new-game": function(event) {
-      debugger;
+      event.preventDefault();
       var maxArmies = 35;
-      var players = Player.find(); // three players, 35 armies each
-      var territories = Territory.find();
+      var players = Player.find().fetch(); // three players, 35 armies each
+      // var territories = Territory.find();
 
       var territoriesByPlayer = [
         ["1", "2"],
@@ -27,18 +28,18 @@ if (Meteor.isClient) {
         ["5"],
       ];
 
-      var game = Game.insert({name: "Game 1"});
+      var gameId = Game.insert({name: "Game"});
       // create oocupations for each territory/player
-      for (var n = 0; n++; n < players.length) {
+      for (var n = 0; n < players.length; n++) {
         var territories = territoriesByPlayer[n];
         var player = players[n];
         var armiesPerTerritory = maxArmies / territories.length
 
-        for (territory in territories) {
+        for (var x = 0; x < territories.length; x++) {
           Occupation.insert({
-            game: game,
-            player: player.id,
-            territory: territory.id,
+            game: gameId,
+            player: player._id,
+            territory: territories[x],
             armies: armiesPerTerritory,
           });
         }
