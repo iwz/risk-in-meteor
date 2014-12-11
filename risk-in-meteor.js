@@ -44,11 +44,14 @@ if (Meteor.isClient) {
 
 
   Template.body.events({
+    "submit .end-turn": function(event) {
+      event.preventDefault();
+      Meteor.call("endTurn");
+    },
     "submit .new-game": function(event) {
       event.preventDefault();
       var maxArmies = 35;
       var players = Player.find().fetch(); // three players, 35 armies each
-      // var territories = Territory.find();
 
       var territoriesByPlayer = [
         ["1", "2"],
@@ -56,12 +59,12 @@ if (Meteor.isClient) {
         ["5"],
       ];
 
-
       Meteor.call("resetGames");
 
       // Create game
       var gameId = Game.insert({
         name: "Game",
+        players: players,
         currentPlayer: players[0]
       });
 
@@ -175,5 +178,26 @@ Meteor.methods({
   resetGames: function() {
     Game.remove({});
     Occupation.remove({});
+  },
+  endTurn: function() {
+    var players = Player.find(); // three players, 35 armies each
+    var playerIds = players.map(function(player) { return player._id} );
+    var game = Game.findOne();
+    var currentPlayer = game.currentPlayer;
+    var playerIndex = playerIds.indexOf(currentPlayer._id);
+
+    playerIndex++;
+    if (playerIndex >= players.count()) {
+      playerIndex = 0;
+    }
+
+    Game.update(
+      {
+        name: game.name
+      },
+      {
+        $set: { currentPlayer: players.fetch()[playerIndex] }
+      }
+    );
   }
 });
