@@ -7,15 +7,12 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault("counter", 0);
 
-  Template.body.helpers(
-    {
-      players: Player.find(),
-      territories: Territory.find(),
-      games: Game.find(),
-      occupations: Occupation.find()
-    }
-  );
-
+  Template.body.helpers({
+    players: Player.find(),
+    territories: Territory.find(),
+    games: Game.find(),
+    occupations: Occupation.find()
+  });
 
   Template.occupation.helpers({
     player_name: function() {
@@ -28,20 +25,12 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.player.helpers({
-    armies: function() {
-      occupation = Occupation.find({player: this._id})
-      return occupation.armies
-    }
-  })
-
   Template.game.helpers({
     currentPlayerName: function() {
       player = Player.findOne(this.currentPlayer)
       return player.name
     }
   })
-
 
   Template.body.events({
     "submit .end-turn": function(event) {
@@ -135,99 +124,8 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-
   Meteor.startup(function () {
-
-    Player.update({
-        name: "Player 1",
-      },
-      {
-        name: "Player 1",
-      },
-      {
-        upsert: true
-      }
-    );
-
-    Player.update(
-      {
-        name: "Player 2",
-      },
-      {
-        name: "Player 2",
-      },
-      {
-        upsert: true
-      }
-    );
-
-    Player.update(
-      {
-        name: "Player 3",
-      },
-      {
-        name: "Player 3",
-      },
-      {
-        upsert: true
-      }
-    );
-
-    Territory.remove({});
-
-    Territory.insert({
-      _id: "1",
-      name: "Greenland",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "2",
-      name: "Alaska",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "3",
-      name: "Northwest Territory",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "4",
-      name: "Alberta",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "5",
-      name: "Ontario",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "6",
-      name: "Quebec",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "7",
-      name: "Western United States",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "8",
-      name: "Eastern United States",
-      continent: "North America",
-    });
-
-    Territory.insert({
-      _id: "9",
-      name: "Central America",
-      continent: "North America",
-    });
+    Meteor.call("setUpBoard");
   });
 }
 
@@ -236,25 +134,4 @@ Meteor.methods({
     Game.remove({});
     Occupation.remove({});
   },
-  endTurn: function() {
-    var players = Player.find(); // three players, 35 armies each
-    var playerIds = players.map(function(player) { return player._id} );
-    var game = Game.findOne();
-    var currentPlayer = game.currentPlayer;
-    var playerIndex = playerIds.indexOf(currentPlayer._id);
-
-    playerIndex++;
-    if (playerIndex >= players.count()) {
-      playerIndex = 0;
-    }
-
-    Game.update(
-      {
-        name: game.name
-      },
-      {
-        $set: { currentPlayer: players.fetch()[playerIndex] }
-      }
-    );
-  }
 });
