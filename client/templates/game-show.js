@@ -8,6 +8,9 @@ Template.game.events({
     return false;
   },
   "submit .attack" : function(event) {
+    event.preventDefault();
+
+    // Who is fighting?
     var attackFromVal = $(event.target).find("[name=attackFrom]").val();
     var targetVal = $(event.target).find("[name=target]").val();
     var attackFrom = Occupation.findOne({
@@ -16,23 +19,50 @@ Template.game.events({
     var target = Occupation.findOne({
       territory: targetVal
     });
-
     var defendingPlayer = Player.findOne({_id: target.player});
 
-    Occupation.update(attackFrom._id, {
-      $inc: { armies: -3 }
-    });
+    // Pit them
+    var attackingRoll = rollDice();
+    var defendingRoll = rollDice();
+    fight(attackingRoll, defendingRoll);
 
-    Occupation.update(target._id, {
-      $set: { armies: 3, player: attackFrom.player }
-    });
+    // Occupation.update(target._id, {
+    //   $set: { armies: 3, player: attackFrom.player}
+    // });
 
     if (Occupation.find({player: defendingPlayer._id}).count() === 0) {
       Meteor.call("newMessage", defendingPlayer.name + " defeated!");
       Player.remove({_id: defendingPlayer._id});
     }
 
-    return false;
+    function rollDice() {
+      var die1 = rollDie();
+      var die2 = rollDie();
+      var diceRollValues = [die1, die2].sort();
+      return diceRollValues;
+    }
+
+    function rollDie(){
+      return Math.floor((Math.random()* 6) + 1);
+    }
+
+    function fight(attacker, defender) {
+      for( n = 0; n < attacker.length; n++ ) {
+        if(attacker[n] > defender[n]) {
+          kill(target);
+          console.log("Attacker wins!");
+        } else {
+          kill(attackFrom);
+          console.log("Defender wins!");
+        }
+      }
+    }
+
+    function kill(occupation) {
+      Occupation.update(occupation._id, {
+        $inc: { armies: -1 }
+      });
+    }
   }
 });
 
