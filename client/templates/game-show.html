@@ -1,7 +1,7 @@
 <template name="game">
-  <h3>{{name}}</h3>
-  <p>{{currentPlayer.name}}, it's your turn!</p>
-
+  <div class="palyer-name-box">
+    <h3>{{currentPlayer.name}}, it's your turn!</h3>
+  </div>
 
   {{#if gameOver}}
     <h4>GAME OVER. {{winningPlayer.name}} wins.</h4>
