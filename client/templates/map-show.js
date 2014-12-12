@@ -30,6 +30,15 @@ Template.map.rendered = function () {
           d3.event.stopPropagation();
           window.TerritoryUI.territoryClicked(d3.event.target.getAttribute("data-territory"));
         })
+
+    svg.selectAll(".place-label")
+        .data(topojson.feature(world, world.objects.map).features)
+      .enter().append("text")
+        .attr("class", "place-label")
+        .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates[0][0]) + ")"; })
+        .attr("dy", ".35em")
+        .attr("style", "font-family: Helvetica; font-size: 14;")
+        .text(function(d) { return d.id; });
   });
 
   $("#map svg").click(function() {
