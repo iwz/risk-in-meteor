@@ -57,5 +57,7 @@ Template.game.helpers({
   },
   occupations: function() { return Occupation.find(); },
   players: function() { return Player.find(); },
-  territories: function() { return Territory.find(); }
+  territories: function() { return Territory.find(); },
+  gameOver: function() { return Player.find().count() == 1; },
+  winningPlayer: function() { return Player.findOne(); },
 });

@@ -2,28 +2,33 @@
   <h3>{{name}}</h3>
   <p>{{currentPlayer.name}}, it's your turn!</p>
 
-  <form class="attack">
-    <select name="attackFrom">
-      {{#each launchTerritories}}
-        {{> territoryOption}}
-      {{/each}}
-    </select>
 
-    <select name="target">
-      {{#each targets}}
-        {{> territoryOption}}
-      {{/each}}
-    </select>
-    <input type="submit" value="Attack!">
-  </form>
+  {{#if gameOver}}
+    <h4>GAME OVER. {{winningPlayer.name}} wins.</h4>
+  {{else}}
+    <form class="attack">
+      <select name="attackFrom">
+        {{#each launchTerritories}}
+          {{> territoryOption}}
+        {{/each}}
+      </select>
 
-  <form class="end-turn">
-    <input type="submit" value="End Turn">
-  </form>
+      <select name="target">
+        {{#each targets}}
+          {{> territoryOption}}
+        {{/each}}
+      </select>
+      <input type="submit" value="Attack!">
+    </form>
 
-  <form class="end-game">
-    <input type="submit" value="End Game">
-  </form>
+    <form class="end-turn">
+      <input type="submit" value="End Turn">
+    </form>
+
+    <form class="end-game">
+      <input type="submit" value="End Game">
+    </form>
+  {{/if}}
 
   <ul>
     {{#each territories}}
