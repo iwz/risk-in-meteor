@@ -10,8 +10,17 @@ Template.game.events({
     var target = Occupation.findOne({
       territory: targetVal
     });
+
+    Occupation.update(attackFrom._id, {
+      $inc: { armies: -3 }
+    });
+
+    Occupation.update(target._id, {
+      $set: { armies: 3, player: attackFrom.player }
+    });
   }
 });
+
 Template.game.helpers({
   launchTerritories: function() {
     var occupations = Occupation.find({
