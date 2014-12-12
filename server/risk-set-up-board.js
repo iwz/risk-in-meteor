@@ -31,12 +31,6 @@ Meteor.methods({
       }
     );
 
-    var territoriesByPlayer = [
-      ["1", "2"],
-      ["3", "4"],
-      ["5"],
-    ];
-
     var world = JSON.parse(Assets.getText("json/map_topojson.json"));
     countries = world.objects.map.geometries;
 
