@@ -1,4 +1,14 @@
 <template name="game">
-  <li>{{name}}</li>
-  <li>{{currentPlayer.name}}, it's your turn!</li>
+  <h3>{{name}}</h3>
+  <p>{{currentPlayer.name}}, it's your turn!</p>
+
+  <select name="attackFrom">
+    {{#each launchTerritories}}
+      {{> launchTerritory}}
+    {{/each}}
+  </select>
+</template>
+
+<template name="launchTerritory">
+  <option value="{{_id}}">{{name}}</option>
 </template>
