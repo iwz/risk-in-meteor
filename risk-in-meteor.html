@@ -200,18 +200,18 @@
     <p>
       {{> loginButtons}}
     </p>
-
-    {{#if currentUser}}
-      <form class="new-game">
-        <input type="submit" class="new-game-button button" value="New Game">
-      </form>
-
-      {{#each games}}
-        {{> game}}
-      {{/each}}
-
-      {{> messageBoard}}
-    {{/if}}
   </header>
+
+  {{#if currentUser}}
+    <form class="new-game">
+      <input type="submit" class="new-game-button button" value="New Game">
+    </form>
+
+    {{#each games}}
+      {{> game}}
+    {{/each}}
+
+    {{> messageBoard}}
+  {{/if}}
 
 </body>
