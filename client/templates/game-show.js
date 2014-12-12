@@ -46,5 +46,8 @@ Template.game.helpers({
     return targets.map(function (target) {
       return Territory.findOne(target.territory);
     });
-  }
+  },
+  occupations: function() { return Occupation.find(); },
+  players: function() { return Player.find(); },
+  territories: function() { return Territory.find(); }
 });

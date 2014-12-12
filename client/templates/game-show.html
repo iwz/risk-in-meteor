@@ -20,6 +20,20 @@
   <form class="end-turn">
     <input type="submit" value="End Turn">
   </form>
+
+  <ul>
+    {{#each territories}}
+      {{> territory}}
+    {{/each}}
+  </ul>
+
+  <ul>
+    {{#each occupations}}
+      {{> occupation}}
+    {{/each}}
+  </ul>
+
+  {{> map}}
 </template>
 
 <template name="territoryOption">

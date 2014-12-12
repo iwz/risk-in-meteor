@@ -3,10 +3,7 @@ if (Meteor.isClient) {
   Session.setDefault("counter", 0);
 
   Template.body.helpers({
-    players: Player.find(),
-    territories: Territory.find(),
     games: function() { return Game.find() },
-    occupations: Occupation.find()
   });
 
   Template.body.events({
