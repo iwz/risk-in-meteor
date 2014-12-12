@@ -1,12 +1,11 @@
 <template name="game">
-  <div class="palyer-name-box">
-    <h3>{{currentPlayer.name}} ({{currentPlayer.username}}), it's your turn!</h3>
-  </div>
-
   {{#if gameOver}}
     <h4>GAME OVER. {{winningPlayer.name}} wins.</h4>
   {{else}}
     {{#if myTurn}}
+      <div class="player-name-box">
+        <h3>{{currentPlayer.name}} ({{currentPlayer.username}}), it's your turn!</h3>
+      </div>
       <div class="actions">
         <form class="attack">
           <select name="attackFrom">
@@ -33,7 +32,9 @@
         </form>
       </div>
     {{else}}
-      It's not your turn....
+      <div class="palyer-name-box">
+        <h3>It's {{currentPlayer.name}}'s turn. Hold on tight!</h3>
+      </div>
     {{/if}}
   {{/if}}
 
