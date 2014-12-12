@@ -11,7 +11,7 @@ Meteor.methods({
     Territory.remove({});
     Message.remove({});
 
-    var world = JSON.parse(Assets.getText("json/map_topojson_3.json"));
+    var world = JSON.parse(Assets.getText("json/map_topojson.json"));
     countries = world.objects.map.geometries;
 
     var territory_id = 1;

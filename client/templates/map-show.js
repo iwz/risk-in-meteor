@@ -16,7 +16,7 @@ Template.map.rendered = function () {
       .attr("width", width)
       .attr("height", height);
 
-  d3.json("/json/map_topojson_3.json", function(error, world) {
+  d3.json("/json/map_topojson.json", function(error, world) {
 
     var countries = topojson.feature(world, world.objects.map).features;
 
