@@ -4,7 +4,12 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     games: function() { return Game.find() },
+    messages: function() { return Message.find() }
   });
+
+  Template.messageBoard.helpers({
+    messages: function() { return Message.find() }
+  })
 
   Template.body.events({
     "submit .end-turn": function(event) {
@@ -16,6 +21,7 @@ if (Meteor.isClient) {
 
       Meteor.call("setUpBoard");
       Meteor.call("resetGames");
+      Meteor.call("newMessage", "You have started a new game!");
 
       var players = Player.find().fetch();
       var territories = Territory.find().fetch();
@@ -34,13 +40,12 @@ if (Meteor.isClient) {
       for (var n = 0; n < players.length; n++) {
         var player = players[n];
         var armiesPerTerritory = Math.floor(maxArmiesPerPlayer / maxTerritoriesPerPlayer)
-        console.log(armiesPerTerritory);
 
         for (var x = 0; x < maxTerritoriesPerPlayer; x++) {
           Occupation.insert({
             game: gameId,
             player: player._id,
-            territory: territories[territoryIndex],
+            territory: territories[territoryIndex]._id,
             armies: armiesPerTerritory,
           });
           territoryIndex++;
@@ -61,4 +66,10 @@ Meteor.methods({
     Game.remove({});
     Occupation.remove({});
   },
+  newMessage: function(message) {
+    console.log(message)
+    Message.insert({
+      message: message
+    })
+  }
 });

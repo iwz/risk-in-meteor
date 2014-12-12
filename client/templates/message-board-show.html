@@ -1,0 +1,11 @@
+<template name="messageBoard">
+  <h5>Message Board</h5>
+  {{name}}
+  <ul>
+  {{#each messages}}
+    <li>
+      {{message}}
+    </li>
+  {{/each}}
+  </ul>
+</template>
