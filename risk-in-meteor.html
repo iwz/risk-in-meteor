@@ -161,8 +161,11 @@
     }
 
     .player-name-box {
+      position: fixed;
+      top: 50px;
+      left: 0px;
       padding: 16px;
-      background: #efefef;
+      z-index: 999;
     }
 
     header {
@@ -195,18 +198,17 @@
     <p>
       {{> loginButtons}}
     </p>
-  </header>
 
-  {{#if currentUser}}
     <form class="new-game">
       <input type="submit" class="new-game-button button" value="New Game">
     </form>
+  </header>
 
+  {{#if currentUser}}
     {{#each games}}
       {{> game}}
     {{/each}}
 
     {{> messageBoard}}
   {{/if}}
-
 </body>
