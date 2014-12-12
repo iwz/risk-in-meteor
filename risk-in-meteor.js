@@ -29,7 +29,6 @@ Meteor.methods({
     Message.insert({
       message: message
     });
-    $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 100);
   },
   colorizeDaMap: function() {
     var players = Player.find().fetch();
