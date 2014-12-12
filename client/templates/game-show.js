@@ -19,41 +19,57 @@ Template.game.events({
     var target = Occupation.findOne({
       territory: targetVal
     });
+    var attackingPlayer = Player.findOne({_id: attackFrom.player});
+    var attackingTerritory = Territory.findOne(attackFrom.territory);
+    var defendingTerritory = Territory.findOne(target.territory);
     var defendingPlayer = Player.findOne({_id: target.player});
 
     // Pit them
-    var attackingRoll = rollDice();
-    var defendingRoll = rollDice();
+    var attackingRoll = rollAttackingDice();
+    var defendingRoll = rollDefendingDice();
+
+    Meteor.call("newMessage", attackingPlayer.name + " declares war on " + defendingPlayer.name + " in " + defendingTerritory.name +"!");
+
     fight(attackingRoll, defendingRoll);
 
-    // Occupation.update(target._id, {
-    //   $set: { armies: 3, player: attackFrom.player}
-    // });
+    if (Occupation.find({player: defendingPlayer._id}).count() === 0) {
+      Meteor.call("newMessage", attackingPlayer.name + " captured " + defendingTerritory.name + "!");
+
+      Occupation.update(target._id, {
+        $set: { armies: 2, player: attackFrom.player}
+      });
+    }
 
     if (Occupation.find({player: defendingPlayer._id}).count() === 0) {
       Meteor.call("newMessage", defendingPlayer.name + " defeated!");
       Player.remove({_id: defendingPlayer._id});
     }
 
-    function rollDice() {
-      var die1 = rollDie();
-      var die2 = rollDie();
-      var diceRollValues = [die1, die2].sort();
-      return diceRollValues;
+    function rollAttackingDice() {
+      return [rollDie(), rollDie(), rollDie()].sort();
+    }
+
+    function rollDefendingDice() {
+      return [rollDie(), rollDie()].sort();
     }
 
     function rollDie(){
       return Math.floor((Math.random()* 6) + 1);
     }
 
-    function fight(attacker, defender) {
-      for( n = 0; n < attacker.length; n++ ) {
-        if(attacker[n] > defender[n]) {
+    function fight(attackingDice, defendingDice) {
+      Meteor.call("newMessage", attackingPlayer.name + " rolls: " + attackingDice);
+      Meteor.call("newMessage", defendingPlayer.name + " rolls: " + defendingDice);
+
+      attackingDice = attackingDice.splice(3 - defendingDice.length);
+
+      for( n = 0; n < attackingDice.length; n++ ) {
+        if (attackingDice[n] > defendingDice[n]) {
           kill(target);
-          console.log("Attacker wins!");
+          Meteor.call("newMessage", attackingPlayer.name + " loses 1 army in "+ defendingTerritory.name +"!");
         } else {
           kill(attackFrom);
-          console.log("Defender wins!");
+          Meteor.call("newMessage", defendingPlayer.name + " loses 1 army in "+ attackingTerritory.name +"!");
         }
       }
     }
