@@ -2,17 +2,20 @@
   <h3>{{name}}</h3>
   <p>{{currentPlayer.name}}, it's your turn!</p>
 
-  <select name="attackFrom">
-    {{#each launchTerritories}}
-      {{> territoryOption}}
-    {{/each}}
-  </select>
+  <form class="attack">
+    <select name="attackFrom">
+      {{#each launchTerritories}}
+        {{> territoryOption}}
+      {{/each}}
+    </select>
 
-  <select name="targets">
-    {{#each targets}}
-      {{> territoryOption}}
-    {{/each}}
-  </select>
+    <select name="target">
+      {{#each targets}}
+        {{> territoryOption}}
+      {{/each}}
+    </select>
+    <input type="submit" value="Attack!">
+  </form>
 </template>
 
 <template name="territoryOption">
