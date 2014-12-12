@@ -53,7 +53,7 @@ Meteor.methods({
         var svg = $("[data-territory='" + countryName + "']");
         var playerName = player.name.replace(" ", "_").toLowerCase();
 
-        svg.attr("class", svg.attr("class") + " " + playerName);
+        svg.attr("class", "territory " + playerName);
       }
     }
   }
