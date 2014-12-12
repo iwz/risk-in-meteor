@@ -7,15 +7,27 @@
   <link rel="stylesheet" type="text/css" href="risk-in-meteor.css">
   <style>
 
-    /*
-      red       8B0829
-      brass     8C7A6E
-      gunmetal  5F5F5F
-      lt-gray   E1E1E1
-      charcoal  2D2D2D
-      green     9DFE38
-      blue      32547F
-    */
+   /*
+    red       8B0829
+    brass     8C7A6E
+    gunmetal  5F5F5F
+    lt-gray   E1E1E1
+    charcoal  2D2D2D
+    green     9DFE38
+    blue      32547F
+   */
+
+   body {
+     font-family: Arial;
+     background: #87e0fd; /* Old browsers */
+     background: -moz-linear-gradient(top,  #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6+ */
+     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#87e0fd), color-stop(40%,#53cbf1), color-stop(100%,#05abe0)); /* Chrome,Safari4+ */
+     background: -webkit-linear-gradient(top,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Chrome10+,Safari5.1+ */
+     background: -o-linear-gradient(top,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* Opera 11.10+ */
+     background: -ms-linear-gradient(top,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* IE10+ */
+     background: linear-gradient(to bottom,  #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C */
+     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=0 ); /* IE6-9 */
+   }
 
     button {
       background: red;
@@ -23,7 +35,7 @@
 
     .details {
       position: absolute;
-      top: 0px;
+      top: 100px;
       right: 0px;
     }
 
@@ -157,27 +169,49 @@
       padding: 16px;
       background: #efefef;
     }
+
+    header {
+      padding: 10px;
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      left: 0px;
+      width: 100%;
+      background: #efefef;
+      z-index: 99;
+    }
+
+    header * {
+      display: inline;
+    }
+
+    .new-game-button {
+      float: right;
+      margin-right: 1em;
+    }
   </style>
 </head>
 
 <body>
-  <h1>Welcome to RISK!</h1>
-  <h2>Would you like to play a game?</h2>
+  <header>
+    <h1>Welcome to RISK!</h1>
+    <h2>Would you like to play a game?</h2>
 
-  <p>
-    {{> loginButtons}}
-  </p>
+    <p>
+      {{> loginButtons}}
+    </p>
 
-  {{#if currentUser}}
-    <form class="new-game">
-      <input type="submit" class="new-game-button button" value="New Game">
-    </form>
+    {{#if currentUser}}
+      <form class="new-game">
+        <input type="submit" class="new-game-button button" value="New Game">
+      </form>
 
-    {{#each games}}
-      {{> game}}
-    {{/each}}
+      {{#each games}}
+        {{> game}}
+      {{/each}}
 
-    {{> messageBoard}}
-  {{/if}}
+      {{> messageBoard}}
+    {{/if}}
+  </div>
 
 </body>
