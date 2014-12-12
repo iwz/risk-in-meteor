@@ -77,6 +77,7 @@
     }
 
     .button {
+      width: 160px;
       border: none;
       padding: 1em;
       font-size: 1em;
@@ -92,6 +93,10 @@
       background: orange;
     }
 
+    .new-game-button {
+      background: green;
+    }
+
     .player_1 {
       fill: blue;
     }
@@ -102,6 +107,18 @@
 
     .player_3 {
       fill: green;
+    }
+
+    .actions * {
+      display: inline;
+    }
+
+    form.attack {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      padding-left: 16px;
+      background: #efefef;
+      min-width: 600px;
     }
   </style>
 </head>
@@ -115,7 +132,7 @@
   </p>
 
   <form class="new-game">
-    <input type="submit" value="New Game">
+    <input type="submit" class="new-game-button button" value="New Game">
   </form>
 
   {{#each games}}
