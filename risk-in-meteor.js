@@ -18,6 +18,9 @@ if (Meteor.isClient) {
     games: function() { return Game.find() },
   });
 
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 }
 
 Meteor.methods({
@@ -32,3 +35,4 @@ Meteor.methods({
     // $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
   }
 });
+
