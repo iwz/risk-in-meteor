@@ -28,7 +28,7 @@ Template.game.events({
     });
 
     if (Occupation.find({player: defendingPlayer._id}).count() === 0) {
-      console.log(defendingPlayer.name + " defeated!");
+      Meteor.call("newMessage", defendingPlayer.name + " defeated!");
       Player.remove({_id: defendingPlayer._id});
     }
 

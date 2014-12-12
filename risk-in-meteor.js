@@ -22,9 +22,13 @@ if (Meteor.isClient) {
 
 Meteor.methods({
   newMessage: function(message) {
-    console.log(message)
+    console.log(message);
     Message.insert({
       message: message
-    })
+    });
+
+    // var el = document.getElementById("messageBoard");
+    // el.scrollTop("9999999px");
+    // $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
   }
 });
