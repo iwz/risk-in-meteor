@@ -31,7 +31,7 @@ Meteor.methods({
     });
 
     if (Meteor.isClient) {
-      $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
+      $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 100);
     }
   },
   colorizeDaMap: function() {

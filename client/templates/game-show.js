@@ -92,6 +92,10 @@ Template.game.events({
   }
 });
 
+Template.game.rendered = function() {
+  setInterval(function() {Meteor.call("colorizeDaMap");}, 20);
+};
+
 Template.game.helpers({
   launchTerritories: function() {
     var occupations = Occupation.find({
