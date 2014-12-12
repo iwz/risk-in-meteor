@@ -168,14 +168,16 @@
     {{> loginButtons}}
   </p>
 
-  <form class="new-game">
-    <input type="submit" class="new-game-button button" value="New Game">
-  </form>
+  {{#if currentUser}}
+    <form class="new-game">
+      <input type="submit" class="new-game-button button" value="New Game">
+    </form>
 
-  {{#each games}}
-    {{> game}}
-  {{/each}}
+    {{#each games}}
+      {{> game}}
+    {{/each}}
 
-  {{> messageBoard}}
+    {{> messageBoard}}
+  {{/if}}
 
 </body>
