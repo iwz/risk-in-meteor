@@ -22,7 +22,7 @@ Template.map.rendered = function () {
 
     svg.selectAll(".country")
         .data(countries)
-      .enter().insert("path", ".graticule")
+      .enter().insert("path")
         .attr("class", "territory")
         .attr("d", path)
         .attr("data-territory", function(d) { return d.id; })
@@ -32,10 +32,27 @@ Template.map.rendered = function () {
         })
   });
 
-  d3.select(self.frameElement).style("height", height + "px");
-
   $("#map svg").click(function() {
     window.TerritoryUI.clearTerritories();
+  });
+
+  var projection2 = d3.geo.miller()
+      .scale(153)
+      .translate([width / 2, height / 2])
+      .precision(.1);
+
+  var path2 = d3.geo.path()
+      .projection(projection2);
+
+  var svg2 = d3.select("#map2").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  d3.json("/json/world-110m.json", function(error, world) {
+    svg2.insert("path")
+        .datum(topojson.feature(world, world.objects.land))
+        .attr("class", "land")
+        .attr("d", path2);
   });
 }
 
@@ -43,25 +60,20 @@ window.TerritoryUI = {
   firstTerritory: "",
   secondTerritory: "",
   assignFirstTerritory: function(territory) {
-    $("[data-js~='first-territory']").text(territory)
     $("#map svg path[data-territory='" + territory + "']").attr("class", "territory territory--first");
     $("#map svg").attr("class", "first-territory-on");
   },
 
   assignSecondTerritory: function(territory) {
-    $("[data-js~='second-territory']").text(territory)
     $("#map svg path[data-territory='" + territory + "']").attr("class", "territory territory--second");
     $("#map svg").attr("class", "first-territory-on second-territory-on");
   },
 
   clearTerritories: function() {
     this.firstTerritory = "";
-    $("[data-js~='first-territory']").text("")
-
     this.secondTerritory = "";
-    $("[data-js~='second-territory']").text("")
 
-    $("#map svg path").attr("class", "territory");
+    $("#map svg path").attr("class", "land");
     $("#map svg").attr("class", "");
   },
 

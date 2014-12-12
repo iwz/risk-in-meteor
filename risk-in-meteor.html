@@ -13,6 +13,8 @@
       gunmetal  5F5F5F
       lt-gray   E1E1E1
       charcoal  2D2D2D
+      green     9DFE38
+      blue      32547F
     */
 
     button {
@@ -23,36 +25,31 @@
       fill: #fff;
     }
 
-    .graticule {
-      fill: none;
-      stroke: #777;
-      stroke-width: .5px;
-      stroke-opacity: .5;
-    }
-
     .territory {
       fill: #E1E1E1;
       stroke: #2D2D2D;
-      stroke-width: .5px;
+      stroke-width: 1px;
     }
 
     .territory:hover {
-      fill: #2D2D2D;
+      fill: #5F5F5F;
     }
 
     #map svg.first-territory-on .territory:not(.territory--first):hover {
       fill: #8B0829;
-      stroke: #8B0829;
     }
 
     #map svg.second-territory-on .territory:not(.territory--first):not(.territory--second):hover {
       fill: #E1E1E1;
-      stroke: #2D2D2D;
+    }
+
+    .land {
+      fill: #E1E1E1;
+      opacity: .5;
     }
 
     .territory--first {
-      fill: #2D2D2D;
-      stroke: #2D2D2D;
+      fill: #5F5F5F;
     }
 
     .territory--second {
@@ -74,6 +71,20 @@
       background: #efefef;
       border-top: solid 2px #555;
       overflow: scroll;
+    }
+    .map-wrapper {
+      position: relative;
+      height: 700px;
+    }
+
+    .map {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    #map2 {
+      pointer-events: none;
     }
 
     .button {
@@ -98,15 +109,15 @@
     }
 
     .player_1 {
-      fill: blue;
+      fill: #32547F;
     }
 
     .player_2 {
-      fill: red;
+      fill: #8B0829;
     }
 
     .player_3 {
-      fill: green;
+      fill: #9DFE38;
     }
 
     .actions * {
