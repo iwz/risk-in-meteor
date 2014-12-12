@@ -4,11 +4,17 @@
 
   <select name="attackFrom">
     {{#each launchTerritories}}
-      {{> launchTerritory}}
+      {{> territoryOption}}
+    {{/each}}
+  </select>
+
+  <select name="targets">
+    {{#each targets}}
+      {{> territoryOption}}
     {{/each}}
   </select>
 </template>
 
-<template name="launchTerritory">
+<template name="territoryOption">
   <option value="{{_id}}">{{name}}</option>
 </template>
