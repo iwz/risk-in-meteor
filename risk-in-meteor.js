@@ -13,18 +13,14 @@ if (Meteor.isClient) {
     },
     "submit .new-game": function(event) {
       event.preventDefault();
-      var maxArmies = 35;
 
       Meteor.call("setUpBoard");
-      var players = Player.find().fetch(); // three players, 35 armies each
-
-      var territoriesByPlayer = [
-        ["1", "2"],
-        ["3", "4"],
-        ["5"],
-      ];
-
       Meteor.call("resetGames");
+
+      var players = Player.find().fetch();
+      var territories = Territory.find().fetch();
+      var maxArmiesPerPlayer = 35;
+      var maxTerritoriesPerPlayer = territories.length / players.length
 
       // Create game
       var gameId = Game.insert({
@@ -33,19 +29,21 @@ if (Meteor.isClient) {
         currentPlayer: players[0]
       });
 
-      // create occupations for each territory/player
+      // Create occupations for each territory/player
+      var territoryIndex = 0;
       for (var n = 0; n < players.length; n++) {
-        var territories = territoriesByPlayer[n];
         var player = players[n];
-        var armiesPerTerritory = Math.floor(maxArmies / territories.length)
+        var armiesPerTerritory = Math.floor(maxArmiesPerPlayer / maxTerritoriesPerPlayer)
+        console.log(armiesPerTerritory);
 
-        for (var x = 0; x < territories.length; x++) {
+        for (var x = 0; x < maxTerritoriesPerPlayer; x++) {
           Occupation.insert({
             game: gameId,
             player: player._id,
-            territory: territories[x],
+            territory: territories[territoryIndex],
             armies: armiesPerTerritory,
           });
+          territoryIndex++;
         }
       }
     }
