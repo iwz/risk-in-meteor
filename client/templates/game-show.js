@@ -1,7 +1,9 @@
 Template.game.events({
+  "submit .end-turn": function(event) {
+    Meteor.call("endTurn");
+    return false;
+  },
   "submit .attack" : function(event) {
-    event.preventDefault();
-
     var attackFromVal = $(event.target).find("[name=attackFrom]").val();
     var targetVal = $(event.target).find("[name=target]").val();
     var attackFrom = Occupation.findOne({
@@ -25,6 +27,8 @@ Template.game.events({
       console.log(defendingPlayer.name + " defeated!");
       Player.remove({_id: defendingPlayer._id});
     }
+
+    return false;
   }
 });
 
