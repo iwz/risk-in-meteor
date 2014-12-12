@@ -1,11 +1,10 @@
 <template name="messageBoard">
-  <h5>Message Board</h5>
-  {{name}}
-  <ul>
-  {{#each messages}}
-    <li>
-      {{message}}
-    </li>
-  {{/each}}
-  </ul>
+  <div id="messageBoard">
+    <div>
+      <h4>Message Board</h4>
+      {{#each messages}}
+        <p>{{message}}</p>
+      {{/each}}
+    </div>
+  </div>
 </template>

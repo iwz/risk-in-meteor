@@ -59,6 +59,17 @@
       fill: none;
       stroke: #fff;
     }
+
+    #messageBoard {
+      position: fixed;
+      left: 0px;
+      height: 75px;
+      right: 0px;
+      bottom: 0px;
+      background: #efefef;
+      border-top: solid 2px #555;
+      overflow: scroll;
+    }
   </style>
 </head>
 
@@ -69,28 +80,10 @@
     <input type="submit" value="New Game">
   </form>
 
-  <form class="end-turn">
-    <input type="submit" value="End Turn">
-  </form>
-
   {{#each games}}
     {{> game}}
   {{/each}}
 
-  <ul>
-    {{#each territories}}
-      {{> territory}}
-    {{/each}}
-  </ul>
-
-  <ul>
-    {{#each occupations}}
-      {{> occupation}}
-    {{/each}}
-  </ul>
-
   {{> messageBoard}}
-
-  {{> map}}
 
 </body>
