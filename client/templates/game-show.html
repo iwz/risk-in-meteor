@@ -6,6 +6,7 @@
   {{#if gameOver}}
     <h4>GAME OVER. {{winningPlayer.name}} wins.</h4>
   {{else}}
+
     <form class="attack">
       <select name="attackFrom">
         {{#each launchTerritories}}
@@ -18,15 +19,16 @@
           {{> territoryOption}}
         {{/each}}
       </select>
-      <input type="submit" value="Attack!">
+
+      <input type="submit" class="attack-button button" value="Attack!">
     </form>
 
     <form class="end-turn">
-      <input type="submit" value="End Turn">
+      <input type="submit" class="end-turn-button button" value="End Turn">
     </form>
 
     <form class="end-game">
-      <input type="submit" value="End Game">
+      <input type="submit" class="end-game-button button" value="End Game">
     </form>
   {{/if}}
 

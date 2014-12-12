@@ -4,6 +4,7 @@
   <script type="text/javascript" src="/js/d3projection.js"></script>
   <script type="text/javascript" src="/js/topojson.1.6.18.min.js"></script>
   <script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="risk-in-meteor.css">
   <style>
 
     /*
@@ -13,6 +14,10 @@
       lt-gray   E1E1E1
       charcoal  2D2D2D
     */
+
+    button {
+      background: red;
+    }
 
     #map svg {
       fill: #fff;
@@ -69,6 +74,22 @@
       background: #efefef;
       border-top: solid 2px #555;
       overflow: scroll;
+    }
+
+    .button {
+      border: none;
+      padding: 1em;
+      font-size: 1em;
+      color: white;
+      border-radius: 4px;
+    }
+
+    .attack-button {
+      background: red;
+    }
+
+    .end-turn-button {
+      background: orange;
     }
   </style>
 </head>
