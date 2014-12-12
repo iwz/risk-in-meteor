@@ -1,12 +1,18 @@
 Meteor.methods({
-  setUpBoard: function(){
-    Meteor.call("newMessage", "You have started a new game!");
-
+  endGame: function() {
     Game.remove({});
     Occupation.remove({});
     Player.remove({});
     Territory.remove({});
     Message.remove({});
+
+    Tracker.flush();
+  },
+
+  setUpBoard: function(){
+    Meteor.call("newMessage", "You have started a new game!");
+
+    Meteor.call("endGame");
 
     for( var n = 1; n <= 3; n++ ) {
       Player.insert(

@@ -3,6 +3,10 @@ Template.game.events({
     Meteor.call("endTurn");
     return false;
   },
+  "submit .end-game": function(event) {
+    Meteor.call("endGame");
+    return false;
+  },
   "submit .attack" : function(event) {
     var attackFromVal = $(event.target).find("[name=attackFrom]").val();
     var targetVal = $(event.target).find("[name=target]").val();
