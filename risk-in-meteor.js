@@ -17,6 +17,8 @@ if (Meteor.isClient) {
     "submit .new-game": function(event) {
       event.preventDefault();
       var maxArmies = 35;
+
+      Meteor.call("setUpBoard");
       var players = Player.find().fetch(); // three players, 35 armies each
 
       var territoriesByPlayer = [

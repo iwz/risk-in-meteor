@@ -2,7 +2,7 @@ Meteor.methods({
   setUpBoard: function(){
 
     for( var n = 1; n <= 3; n++ ) {
-      Player.update(
+      Player.upsert(
         { name: "Player "+n },
         { $set: { name: "Player "+n } }
       );

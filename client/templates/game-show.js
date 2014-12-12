@@ -11,6 +11,8 @@ Template.game.events({
       territory: targetVal
     });
 
+    var defendingPlayer = Player.findOne({_id: target.player});
+
     Occupation.update(attackFrom._id, {
       $inc: { armies: -3 }
     });
@@ -18,6 +20,11 @@ Template.game.events({
     Occupation.update(target._id, {
       $set: { armies: 3, player: attackFrom.player }
     });
+
+    if (Occupation.find({player: defendingPlayer._id}).count() === 0) {
+      console.log(defendingPlayer.name + " defeated!");
+      Player.remove({_id: defendingPlayer._id});
+    }
   }
 });
 
