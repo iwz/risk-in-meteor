@@ -21,6 +21,12 @@
       background: red;
     }
 
+    .details {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+    }
+
     #map svg {
       fill: #fff;
     }
@@ -65,10 +71,12 @@
     #messageBoard {
       position: fixed;
       left: 0px;
-      height: 200px;
+      height: 100px;
       right: 0px;
       bottom: 0px;
-      background: #efefef;
+      color: lime;
+      font-family: courier;
+      background: #333;
       border-top: solid 2px #555;
       overflow: scroll;
     }
@@ -120,16 +128,23 @@
       fill: #9DFE38;
     }
 
+    .actions {
+      width: 100%;
+      position: fixed;
+      bottom: 100px;
+      left: 0px;
+      background: #efefef;
+      padding: 10px;
+    }
+
     .actions * {
       display: inline;
     }
 
     form.attack {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      display: inline-block;
       padding-left: 16px;
-      background: #efefef;
-      min-width: 600px;
+      min-width: 300px;
     }
 
     .player-name-box {

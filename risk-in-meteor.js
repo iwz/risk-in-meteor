@@ -29,6 +29,9 @@ Meteor.methods({
     Message.insert({
       message: message
     });
+    if (Meteor.isClient) {
+      $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 100);
+    }
   },
   colorizeDaMap: function() {
     var players = Player.find().fetch();
@@ -48,10 +51,12 @@ Meteor.methods({
 
         var countryName = territory[0].name
 
-        var svg = $("[data-territory='" + countryName + "']");
-        var playerName = player.name.replace(" ", "_").toLowerCase();
+        if (Meteor.isClient) {
+          var svg = $("[data-territory='" + countryName + "']");
+          var playerName = player.name.replace(" ", "_").toLowerCase();
 
-        svg.attr("class", "territory " + playerName);
+          svg.attr("class", "territory " + playerName);
+        }
       }
     }
   }
