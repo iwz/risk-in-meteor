@@ -5,7 +5,7 @@ if (Meteor.isClient) {
   Template.body.helpers({
     players: Player.find(),
     territories: Territory.find(),
-    games: Game.find(),
+    // games: Game.find(),
     occupations: Occupation.find()
   });
 

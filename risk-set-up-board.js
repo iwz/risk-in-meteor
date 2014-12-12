@@ -1,5 +1,6 @@
 Meteor.methods({
   setUpBoard: function(){
+    console.log("setting up board");
 
     for( var n = 1; n <= 3; n++ ) {
       Player.update(
@@ -7,6 +8,7 @@ Meteor.methods({
         { $set: { name: "Player "+n } }
       );
     }
+    console.log("created Players", Player.find().fetch());
 
     Territory.remove({});
 

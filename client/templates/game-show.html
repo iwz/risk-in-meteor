@@ -1,7 +1,29 @@
-<template name="game">
-  <li>{{name}}</li>
-  <li>{{currentPlayer.name}}, it's your turn!</li>
-
+<template name="games">
+  {{#each games}}
+    {{> game}}
+  {{/each}}
 </template>
+
+<template name="game">
+  <h3>{{name}}</h3>
+  <p>{{currentPlayer.name}}, it's your turn!</p>
+
+  <select name="attackFrom">
+    {{#each launchTerritories}}
+      {{> launchTerritory}}
+    {{/each}}
+  </select>
+</template>
+
+<!-- <template name="attackFrom"> -->
+<!--   <select name="attackFrom"> -->
+<!--     {{#each launchTerritories}} -->
+<!--       {{> launchTerritory}} -->
+<!--     {{/each}} -->
+<!--   </select> -->
+<!-- </template> -->
+
+<template name="launchTerritory">
+  <option value="{{launchTerritory._id}}">{{launchTerritory.name}}</option>
 </template>
 
