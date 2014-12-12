@@ -32,11 +32,15 @@ Template.game.events({
 
     fight(attackingRoll, defendingRoll);
 
-    if (Occupation.find({player: defendingPlayer._id}).count() === 0) {
+    if (target.armies < 1) {
       Meteor.call("newMessage", attackingPlayer.name + " captured " + defendingTerritory.name + "!");
 
+      Occupation.update(attackFrom._id, {
+        $inc: { armies: -1}
+      });
+
       Occupation.update(target._id, {
-        $set: { armies: 2, player: attackFrom.player}
+        $set: { armies: 1, player: attackFrom.player}
       });
     }
 
@@ -78,6 +82,7 @@ Template.game.events({
       Occupation.update(occupation._id, {
         $inc: { armies: -1 }
       });
+      occupation.armies--;
     }
   }
 });
@@ -94,8 +99,7 @@ Template.game.helpers({
   },
   targets: function() {
     var targets = Occupation.find({
-      player: { $not: this.currentPlayer._id },
-      armies: {$gt: 1}
+      player: { $not: this.currentPlayer._id }
     });
     return targets.map(function (target) {
       return Territory.findOne(target.territory);
