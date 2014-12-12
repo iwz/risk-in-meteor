@@ -17,7 +17,8 @@ Meteor.methods({
     for( var n = 1; n <= 3; n++ ) {
       Player.insert(
         {
-          name: "Player "+n
+          name: "Player "+n,
+          username: "player"+n
         }
       );
     }

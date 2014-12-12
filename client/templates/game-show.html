@@ -1,36 +1,40 @@
 <template name="game">
   <div class="palyer-name-box">
-    <h3>{{currentPlayer.name}}, it's your turn!</h3>
+    <h3>{{currentPlayer.name}} ({{currentPlayer.username}}), it's your turn!</h3>
   </div>
 
   {{#if gameOver}}
     <h4>GAME OVER. {{winningPlayer.name}} wins.</h4>
   {{else}}
-    <div class="actions">
-      <form class="attack">
-        <select name="attackFrom">
-          {{#each launchTerritories}}
-            {{> territoryOption}}
-          {{/each}}
-        </select>
+    {{#if myTurn}}
+      <div class="actions">
+        <form class="attack">
+          <select name="attackFrom">
+            {{#each launchTerritories}}
+              {{> territoryOption}}
+            {{/each}}
+          </select>
 
-        <select name="target">
-          {{#each targets}}
-            {{> territoryOption}}
-          {{/each}}
-        </select>
+          <select name="target">
+            {{#each targets}}
+              {{> territoryOption}}
+            {{/each}}
+          </select>
 
-        <input type="submit" class="attack-button button" value="Attack!">
-      </form>
+          <input type="submit" class="attack-button button" value="Attack!">
+        </form>
 
-      <form class="end-turn">
-        <input type="submit" class="end-turn-button button" value="End Turn">
-      </form>
+        <form class="end-turn">
+          <input type="submit" class="end-turn-button button" value="End Turn">
+        </form>
 
-      <form class="end-game">
-        <input type="submit" class="end-game-button button" value="End Game">
-      </form>
-    </div>
+        <form class="end-game">
+          <input type="submit" class="end-game-button button" value="End Game">
+        </form>
+      </div>
+    {{else}}
+      It's not your turn....
+    {{/if}}
   {{/if}}
 
   <div class="details">

@@ -119,4 +119,6 @@ Template.game.helpers({
   territories: function() { return Territory.find(); },
   gameOver: function() { return Player.find().count() == 1; },
   winningPlayer: function() { return Player.findOne(); },
+  myTurn: function() { return Meteor.user().username == Player.findOne(this.currentPlayer).username},
+  currentPlayer: function() { return Player.findOne(this.currentPlayer) },
 });
