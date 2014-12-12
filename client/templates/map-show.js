@@ -47,11 +47,13 @@ window.TerritoryUI = {
     $("#map svg path[data-territory='" + territory + "']").attr("class", "territory territory--first");
     $("#map svg").attr("class", "first-territory-on");
   },
+
   assignSecondTerritory: function(territory) {
     $("[data-js~='second-territory']").text(territory)
     $("#map svg path[data-territory='" + territory + "']").attr("class", "territory territory--second");
     $("#map svg").attr("class", "first-territory-on second-territory-on");
   },
+
   clearTerritories: function() {
     this.firstTerritory = "";
     $("[data-js~='first-territory']").text("")
@@ -62,6 +64,7 @@ window.TerritoryUI = {
     $("#map svg path").attr("class", "territory");
     $("#map svg").attr("class", "");
   },
+
   territoryClicked: function (territory) {
     if (this.firstTerritory === "") {
       this.firstTerritory = territory;

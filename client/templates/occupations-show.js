@@ -8,4 +8,3 @@ Template.occupation.helpers({
     return territory.name;
   }
 });
-

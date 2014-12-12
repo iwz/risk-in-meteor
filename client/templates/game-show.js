@@ -1,6 +1,7 @@
 Template.game.events({
   "submit .end-turn": function(event) {
     Meteor.call("endTurn");
+    Meteor.call("colorizeDaMap");
     return false;
   },
   "submit .end-game": function(event) {
@@ -13,6 +14,10 @@ Template.game.events({
     // Who is fighting?
     var attackFromVal = $(event.target).find("[name=attackFrom]").val();
     var targetVal = $(event.target).find("[name=target]").val();
+
+    // var attackFromVal = $(".territory--first");
+    // var targetVal = $(".territory--second");
+
     var attackFrom = Occupation.findOne({
       territory: attackFromVal
     });

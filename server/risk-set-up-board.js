@@ -71,6 +71,5 @@ Meteor.methods({
         territoryIndex++;
       }
     }
-
   }
 });

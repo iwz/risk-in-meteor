@@ -30,9 +30,32 @@ Meteor.methods({
       message: message
     });
 
-    // var el = document.getElementById("messageBoard");
-    // el.scrollTop("9999999px");
-    // $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
+    $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
+  },
+  colorizeDaMap: function() {
+    var players = Player.find().fetch();
+    for (var i = 0; i < players.length; i++) {
+      setCountryClasses(players[i]);
+    }
+
+    function setCountryClasses(player) {
+      occupations = Occupation.find({
+        player: player._id
+      }).fetch();
+
+      for (var i = 0; i < occupations.length; i++) {
+        territory = Territory.find({
+          _id: occupations[i].territory
+        }).fetch();
+
+        var countryName = territory[0].name
+
+        var svg = $("[data-territory='" + countryName + "']");
+        var playerName = player.name.replace(" ", "_").toLowerCase();
+
+        svg.attr("class", svg.attr("class") + " " + playerName);
+      }
+    }
   }
 });
 
