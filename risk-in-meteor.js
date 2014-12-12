@@ -30,7 +30,9 @@ Meteor.methods({
       message: message
     });
 
-    $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
+    if (Meteor.isClient) {
+      $("#messageBoard").animate({ scrollTop: $("#messageBoard > div")[0].scrollHeight }, 1000);
+    }
   },
   colorizeDaMap: function() {
     var players = Player.find().fetch();
