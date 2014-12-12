@@ -63,12 +63,14 @@ Meteor.methods({
       var armiesPerTerritory = Math.floor(maxArmiesPerPlayer / maxTerritoriesPerPlayer)
 
       for (var x = 0; x < maxTerritoriesPerPlayer; x++) {
-        Occupation.insert({
-          game: gameId,
-          player: player._id,
-          territory: territories[territoryIndex]._id,
-          armies: armiesPerTerritory,
-        });
+        if (territories[territoryIndex]) {
+          Occupation.insert({
+            game: gameId,
+            player: player._id,
+            territory: territories[territoryIndex]._id,
+            armies: armiesPerTerritory,
+          });
+        }
         territoryIndex++;
       }
     }
