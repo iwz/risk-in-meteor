@@ -34,7 +34,7 @@ if (Meteor.isClient) {
         currentPlayer: players[0]
       });
 
-      // create oocupations for each territory/player
+      // create occupations for each territory/player
       for (var n = 0; n < players.length; n++) {
         var territories = territoriesByPlayer[n];
         var player = players[n];
