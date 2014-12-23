@@ -3,6 +3,8 @@ risk-in-meteor
 
 RISK in Meteor
 
+*NOTE: This was a hackathon project, and does not represent good practices for coding. It was a pure learning experiment to see what was possible with Meteor in about a day and a half.*
+
 
 ## to debug server-side
 
